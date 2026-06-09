@@ -1,0 +1,32 @@
+[
+{
+  "directory": "C:/Slot/app/.cxx/Debug/1e11493b/x86_64",
+  "command": "C:\\Users\\LU\\AppData\\Local\\Android\\Sdk\\ndk\\27.0.12077973\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=x86_64-none-linux-android26 --sysroot=C:/Users/LU/AppData/Local/Android/Sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dmagicsslot_EXPORTS -IC:/Slot/app/src/main/cpp -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -O3 -DANDROID -DUSE_OPENGL_ES -frtti -fexceptions -fno-limit-debug-info  -fPIC -O2 -std=c++17 -DANDROID -DUSE_OPENGL_ES3 -frtti -fexceptions -Wall -Wno-unused-variable -std=c++17 -o CMakeFiles\\magicsslot.dir\\jni_bridge.cpp.o -c C:\\Slot\\app\\src\\main\\cpp\\jni_bridge.cpp",
+  "file": "C:\\Slot\\app\\src\\main\\cpp\\jni_bridge.cpp"
+},
+{
+  "directory": "C:/Slot/app/.cxx/Debug/1e11493b/x86_64",
+  "command": "C:\\Users\\LU\\AppData\\Local\\Android\\Sdk\\ndk\\27.0.12077973\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=x86_64-none-linux-android26 --sysroot=C:/Users/LU/AppData/Local/Android/Sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dmagicsslot_EXPORTS -IC:/Slot/app/src/main/cpp -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -O3 -DANDROID -DUSE_OPENGL_ES -frtti -fexceptions -fno-limit-debug-info  -fPIC -O2 -std=c++17 -DANDROID -DUSE_OPENGL_ES3 -frtti -fexceptions -Wall -Wno-unused-variable -std=c++17 -o CMakeFiles\\magicsslot.dir\\SlotEngine.cpp.o -c C:\\Slot\\app\\src\\main\\cpp\\SlotEngine.cpp",
+  "file": "C:\\Slot\\app\\src\\main\\cpp\\SlotEngine.cpp"
+},
+{
+  "directory": "C:/Slot/app/.cxx/Debug/1e11493b/x86_64",
+  "command": "C:\\Users\\LU\\AppData\\Local\\Android\\Sdk\\ndk\\27.0.12077973\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=x86_64-none-linux-android26 --sysroot=C:/Users/LU/AppData/Local/Android/Sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dmagicsslot_EXPORTS -IC:/Slot/app/src/main/cpp -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -O3 -DANDROID -DUSE_OPENGL_ES -frtti -fexceptions -fno-limit-debug-info  -fPIC -O2 -std=c++17 -DANDROID -DUSE_OPENGL_ES3 -frtti -fexceptions -Wall -Wno-unused-variable -std=c++17 -o CMakeFiles\\magicsslot.dir\\Renderer.cpp.o -c C:\\Slot\\app\\src\\main\\cpp\\Renderer.cpp",
+  "file": "C:\\Slot\\app\\src\\main\\cpp\\Renderer.cpp"
+},
+{
+  "directory": "C:/Slot/app/.cxx/Debug/1e11493b/x86_64",
+  "command": "C:\\Users\\LU\\AppData\\Local\\Android\\Sdk\\ndk\\27.0.12077973\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=x86_64-none-linux-android26 --sysroot=C:/Users/LU/AppData/Local/Android/Sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dmagicsslot_EXPORTS -IC:/Slot/app/src/main/cpp -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -O3 -DANDROID -DUSE_OPENGL_ES -frtti -fexceptions -fno-limit-debug-info  -fPIC -O2 -std=c++17 -DANDROID -DUSE_OPENGL_ES3 -frtti -fexceptions -Wall -Wno-unused-variable -std=c++17 -o CMakeFiles\\magicsslot.dir\\ParticleSystem.cpp.o -c C:\\Slot\\app\\src\\main\\cpp\\ParticleSystem.cpp",
+  "file": "C:\\Slot\\app\\src\\main\\cpp\\ParticleSystem.cpp"
+},
+{
+  "directory": "C:/Slot/app/.cxx/Debug/1e11493b/x86_64",
+  "command": "C:\\Users\\LU\\AppData\\Local\\Android\\Sdk\\ndk\\27.0.12077973\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=x86_64-none-linux-android26 --sysroot=C:/Users/LU/AppData/Local/Android/Sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dmagicsslot_EXPORTS -IC:/Slot/app/src/main/cpp -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -O3 -DANDROID -DUSE_OPENGL_ES -frtti -fexceptions -fno-limit-debug-info  -fPIC -O2 -std=c++17 -DANDROID -DUSE_OPENGL_ES3 -frtti -fexceptions -Wall -Wno-unused-variable -std=c++17 -o CMakeFiles\\magicsslot.dir\\ShaderManager.cpp.o -c C:\\Slot\\app\\src\\main\\cpp\\ShaderManager.cpp",
+  "file": "C:\\Slot\\app\\src\\main\\cpp\\ShaderManager.cpp"
+},
+{
+  "directory": "C:/Slot/app/.cxx/Debug/1e11493b/x86_64",
+  "command": "C:\\Users\\LU\\AppData\\Local\\Android\\Sdk\\ndk\\27.0.12077973\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=x86_64-none-linux-android26 --sysroot=C:/Users/LU/AppData/Local/Android/Sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dmagicsslot_EXPORTS -IC:/Slot/app/src/main/cpp -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -O3 -DANDROID -DUSE_OPENGL_ES -frtti -fexceptions -fno-limit-debug-info  -fPIC -O2 -std=c++17 -DANDROID -DUSE_OPENGL_ES3 -frtti -fexceptions -Wall -Wno-unused-variable -std=c++17 -o CMakeFiles\\magicsslot.dir\\AudioEngine.cpp.o -c C:\\Slot\\app\\src\\main\\cpp\\AudioEngine.cpp",
+  "file": "C:\\Slot\\app\\src\\main\\cpp\\AudioEngine.cpp"
+}
+]

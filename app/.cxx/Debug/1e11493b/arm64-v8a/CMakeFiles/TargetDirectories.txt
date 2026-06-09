@@ -1,0 +1,3 @@
+C:/Slot/app/.cxx/Debug/1e11493b/arm64-v8a/CMakeFiles/magicsslot.dir
+C:/Slot/app/.cxx/Debug/1e11493b/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Slot/app/.cxx/Debug/1e11493b/arm64-v8a/CMakeFiles/rebuild_cache.dir

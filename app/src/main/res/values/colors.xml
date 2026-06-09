@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FF00F5FF</color>
+    <color name="colorBackground">#FF04040F</color>
+    <color name="colorSurface">#FF0D0D2B</color>
+    <color name="colorNeonGold">#FFFFD700</color>
+    <color name="colorNeonMagenta">#FFFF00FF</color>
+</resources>

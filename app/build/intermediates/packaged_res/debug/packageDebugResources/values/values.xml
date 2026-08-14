@@ -6,10 +6,11 @@
     <color name="colorPrimary">#FF00F5FF</color>
     <color name="colorSurface">#FF0D0D2B</color>
     <string name="app_name">Magics Slot</string>
-    <style name="Theme.MagicsSlot" parent="android:Theme.Material.NoTitleBar.Fullscreen">
+    <style name="Theme.MagicsSlot" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowBackground">@color/colorBackground</item>
         <item name="android:statusBarColor">@color/colorBackground</item>
         <item name="android:navigationBarColor">@color/colorBackground</item>
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 </resources>

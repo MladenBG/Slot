@@ -120,63 +120,148 @@ GLuint Renderer::makeTexture(int w, int h, const uint8_t* data) {
 
 GLuint Renderer::makeSymTexture(Symbol sym, int size) {
     std::vector<uint8_t> px(size*size*4, 0);
-    float cr=kSymRGB[sym][0], cg=kSymRGB[sym][1], cb=kSymRGB[sym][2];
 
     for(int y=0;y<size;y++){
         for(int x=0;x<size;x++){
             float nx=(x/(float)size)*2.f-1.f;
             float ny=(y/(float)size)*2.f-1.f;
             float dist=sqrtf(nx*nx+ny*ny);
-            uint8_t alpha=0; float bright=1.f;
+            float r=0.f, g=0.f, b=0.f, a=0.f;
+
+            auto distToSeg = [](float px, float py, float ax, float ay, float bx, float by) -> float {
+                float abx = bx - ax, aby = by - ay;
+                float apx = px - ax, apy = py - ay;
+                float ab2 = abx*abx + aby*aby;
+                float t = std::clamp((apx*abx + apy*aby) / (ab2 + 1e-6f), 0.f, 1.f);
+                float qx = ax + t*abx, qy = ay + t*aby;
+                return sqrtf((px-qx)*(px-qx) + (py-qy)*(py-qy));
+            };
+
+            auto mixC = [&](float r1, float g1, float b1, float r2, float g2, float b2, float t) {
+                r = r1*(1.f-t) + r2*t; g = g1*(1.f-t) + g2*t; b = b1*(1.f-t) + b2*t;
+            };
 
             switch(sym){
                 case SYM_CHERRY: {
-                    float d1=sqrtf((nx+0.3f)*(nx+0.3f)+(ny+0.2f)*(ny+0.2f));
-                    float d2=sqrtf((nx-0.3f)*(nx-0.3f)+(ny+0.2f)*(ny+0.2f));
-                    alpha=(d1<0.5f||d2<0.5f)?255:0;
-                    bright=std::max(0.f,1.f-dist*0.5f);
+                    float cx1=-0.25f, cy1=0.2f, cx2=0.25f, cy2=0.2f;
+                    float d1 = sqrtf((nx-cx1)*(nx-cx1)+(ny-cy1)*(ny-cy1));
+                    float d2 = sqrtf((nx-cx2)*(nx-cx2)+(ny-cy2)*(ny-cy2));
+                    float s1 = distToSeg(nx,ny, cx1,cy1, 0.0f,-0.4f);
+                    float s2 = distToSeg(nx,ny, cx2,cy2, 0.0f,-0.4f);
+                    
+                    if(s1<0.05f || s2<0.05f) { // Stems
+                        r=0.2f; g=0.8f; b=0.2f; a=1.f;
+                        if(std::min(s1,s2)<0.02f) { r=0.5f; g=1.0f; b=0.5f; } // Stem highlight
+                    }
+                    if(d1<0.35f || d2<0.35f) { // Cherries
+                        float d = (d1<d2)?d1:d2;
+                        float cx = (d1<d2)?cx1:cx2;
+                        float cy = (d1<d2)?cy1:cy2;
+                        // Glossy radial gradient
+                        float t = std::clamp(d/0.35f, 0.f, 1.f);
+                        mixC(1.0f,0.1f,0.2f, 0.4f,0.0f,0.1f, t*t);
+                        a=1.f;
+                        // Highlight reflection
+                        float hlx = cx - 0.12f, hly = cy - 0.12f;
+                        float hd = sqrtf((nx-hlx)*(nx-hlx)+(ny-hly)*(ny-hly));
+                        if(hd<0.1f) { r+=0.5f; g+=0.5f; b+=0.5f; }
+                        // Border
+                        if(d>0.32f) { r=0.1f; g=0.f; b=0.f; }
+                    }
                     break;
                 }
                 case SYM_DIAMOND: {
-                    float dd=fabsf(nx)+fabsf(ny);
-                    alpha=(dd<0.9f)?255:0;
-                    bright=1.f-dd*0.25f;
+                    float dd = fabsf(nx*0.8f) + fabsf(ny*1.2f);
+                    if(dd<0.75f) {
+                        a=1.f;
+                        // Facets
+                        if(ny < -0.2f && fabsf(nx) < 0.4f) { mixC(0.6f,1.f,1.f, 0.0f,0.5f,1.f, dd); }
+                        else if(ny > 0.0f) { mixC(0.0f,0.4f,0.8f, 0.0f,0.2f,0.5f, dd); }
+                        else { mixC(0.2f,0.8f,1.f, 0.0f,0.4f,0.8f, dd); }
+                        // Edges
+                        if(fabsf(dd-0.7f)<0.05f || fabsf(ny)<0.05f || fabsf(fabsf(nx)-0.4f)<0.05f) {
+                            r=0.8f; g=1.f; b=1.f;
+                        }
+                    }
                     break;
                 }
                 case SYM_SEVEN: {
-                    // '7' shape
-                    bool topBar=(ny>0.5f&&fabsf(nx)<0.7f);
-                    bool diag  =(ny>-0.2f&&ny<0.5f&&(nx-ny*0.5f)>0.1f&&(nx-ny*0.5f)<0.7f);
-                    bool bot   =(ny<-0.5f&&fabsf(nx)<0.6f);
-                    alpha=(topBar||diag||bot)?255:0;
-                    bright=1.2f-dist*0.3f;
+                    float dTop = distToSeg(nx,ny, -0.45f,-0.5f, 0.45f,-0.5f);
+                    float dDiag = distToSeg(nx,ny, 0.45f,-0.5f, -0.15f,0.6f);
+                    float d = std::min(dTop, dDiag);
+                    if(d<0.2f) {
+                        a=1.f;
+                        float t = std::clamp(d/0.2f, 0.f, 1.f);
+                        // Red fill with Gold border
+                        if(d>0.14f) { mixC(1.0f,0.9f,0.2f, 0.6f,0.4f,0.0f, (d-0.14f)/0.06f); } // Gold border
+                        else { 
+                            mixC(1.0f,0.1f,0.1f, 0.6f,0.0f,0.0f, d/0.14f); // Red interior
+                            // Glossy top
+                            if(ny < -0.3f) { r+=0.4f; g+=0.2f; b+=0.2f; }
+                        }
+                    }
                     break;
                 }
                 case SYM_WILD: {
-                    float angle=atan2f(ny,nx);
-                    float petal=0.7f+0.3f*cosf(angle*5.f);
-                    alpha=(dist<petal*0.85f)?255:0;
-                    bright=1.f-dist*0.4f;
+                    float angle = atan2f(ny,nx);
+                    float petal = 0.6f + 0.25f*cosf(angle*5.f);
+                    if(dist<petal) {
+                        a=1.f;
+                        float t = dist/petal;
+                        // Gold star
+                        if(dist>petal-0.1f) { mixC(1.0f,0.6f,0.0f, 0.8f,0.3f,0.0f, (dist-(petal-0.1f))/0.1f); }
+                        else {
+                            mixC(1.0f,1.0f,0.5f, 1.0f,0.8f,0.0f, t);
+                            if(dist<0.2f) { r=1.f; g=1.f; b=1.f; } // White core
+                        }
+                    }
                     break;
                 }
                 case SYM_SCATTER: {
-                    alpha=(dist<0.85f)?255:0;
-                    bright=(dist>0.5f&&dist<0.85f)?1.5f:0.9f;
+                    if(dist<0.75f) {
+                        a=1.f;
+                        // Purple orb
+                        mixC(0.8f,0.2f,1.0f, 0.2f,0.0f,0.4f, dist/0.75f);
+                        // Inner ring
+                        if(fabsf(dist-0.4f)<0.05f) { r=1.f; g=0.5f; b=1.f; }
+                        // Starburst
+                        if(fabsf(nx)<0.05f || fabsf(ny)<0.05f || fabsf(fabsf(nx)-fabsf(ny))<0.05f) {
+                            if(dist<0.6f) { r=1.f; g=0.8f; b=1.f; }
+                        }
+                        // Gold border
+                        if(dist>0.65f) { mixC(1.0f,0.8f,0.2f, 0.6f,0.4f,0.0f, (dist-0.65f)/0.1f); }
+                    }
                     break;
                 }
-                default: { // BAR symbols
-                    float bh=0.35f-(sym-SYM_BAR1)*0.04f;
-                    alpha=(fabsf(nx)<0.75f&&fabsf(ny)<bh)?255:0;
-                    bright=1.f;
+                default: { // BAR3, BAR2, BAR1
+                    int barCount = sym - SYM_BAR3 + 3;
+                    float width = 0.7f, height = 0.2f;
+                    
+                    auto drawBar = [&](float cy) {
+                        float dx = fabsf(nx), dy = fabsf(ny-cy);
+                        if(dx<width && dy<height) {
+                            a=1.f;
+                            // Silver/Blue metallic gradient
+                            float t = dy/height;
+                            if(dx>width-0.05f || dy>height-0.05f) { r=0.8f; g=0.8f; b=1.0f; } // Edge highlight
+                            else { mixC(0.9f,0.9f,1.0f, 0.3f,0.3f,0.5f, t); }
+                            // "BAR" pseudo-text lines
+                            if(dy<0.05f && dx<width-0.2f) { r=0.1f; g=0.1f; b=0.2f; }
+                        }
+                    };
+
+                    if(barCount==1) { drawBar(0.0f); }
+                    else if(barCount==2) { drawBar(-0.25f); drawBar(0.25f); }
+                    else { drawBar(-0.4f); drawBar(0.0f); drawBar(0.4f); }
                     break;
                 }
             }
 
             int idx=(y*size+x)*4;
-            px[idx+0]=(uint8_t)std::min(255.f,cr*bright*255.f);
-            px[idx+1]=(uint8_t)std::min(255.f,cg*bright*255.f);
-            px[idx+2]=(uint8_t)std::min(255.f,cb*bright*255.f);
-            px[idx+3]=alpha;
+            px[idx+0]=(uint8_t)std::clamp(r*255.f, 0.f, 255.f);
+            px[idx+1]=(uint8_t)std::clamp(g*255.f, 0.f, 255.f);
+            px[idx+2]=(uint8_t)std::clamp(b*255.f, 0.f, 255.f);
+            px[idx+3]=(uint8_t)std::clamp(a*255.f, 0.f, 255.f);
         }
     }
     return makeTexture(size,size,px.data());
@@ -219,22 +304,20 @@ void Renderer::passReels(const SlotEngine& engine) {
     GLuint p=m_shaders.symProg; glUseProgram(p);
     u1f(p,"uTime",m_time);
 
-    // Identity MVP (draw in NDC directly)
-    float identity[16]={1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1};
-
-    // Layout: 5 reels centered, aspect-corrected
+    // Layout: 5 reels centered, aspect-corrected to be perfectly square
     float aspect = (float)m_h/(float)m_w;
-    float reelW  = 0.30f;           // NDC width
-    float symH   = 0.22f * aspect;  // NDC height (keep square-ish)
-    float gapX   = 0.04f;
-    float totalW = REEL_COUNT*reelW + (REEL_COUNT-1)*gapX;
+    float reelW  = 0.27f;           // NDC width per reel
+    float symH   = reelW / aspect;  // NDC height (aspect-corrected to be square on screen)
+    float gapX   = 0.015f;          // tight horizontal gap
+    int rc = engine.getReelCount();
+    float totalW = rc*reelW + (rc-1)*gapX;
     float startX = -totalW*0.5f + reelW*0.5f;
-    float reelTop= 0.45f;
+    float reelTop= symH; // Centers the 3 rows: symH, 0.0, -symH
 
     const auto& result = engine.getLastResult();
 
     // Create temporary VAO for a symbol quad
-    float hw=reelW*0.46f, hh=symH*0.46f;
+    float hw=reelW*0.44f, hh=symH*0.44f;
     float qverts[16]={
        -hw,-hh,0,0,
         hw,-hh,1,0,
@@ -252,12 +335,27 @@ void Renderer::passReels(const SlotEngine& engine) {
 
     GLint mvpLoc=glGetUniformLocation(p,"uMVP");
 
-    for(int r=0;r<REEL_COUNT;r++){
+    // ── Scissor Test: Clip symbols scrolling outside the reels container boundary ──
+    float scissorLeft   = -totalW * 0.5f;
+    float scissorRight  =  totalW * 0.5f;
+    float scissorBottom = -1.5f * symH;
+    float scissorTop    =  1.5f * symH;
+
+    int scX = static_cast<int>((scissorLeft + 1.0f) * 0.5f * m_w);
+    int scY = static_cast<int>((scissorBottom + 1.0f) * 0.5f * m_h);
+    int scW = static_cast<int>((scissorRight - scissorLeft) * 0.5f * m_w);
+    int scH = static_cast<int>((scissorTop - scissorBottom) * 0.5f * m_h);
+
+    glEnable(GL_SCISSOR_TEST);
+    glScissor(scX, scY, scW, scH);
+
+    for(int r=0;r<rc;r++){
         const auto& rs=engine.getReelState(r);
         float reelX = startX + r*(reelW+gapX);
         float scrollFrac = fmodf(rs.offset,1.f);
 
-        for(int row=0;row<ROW_COUNT;row++){
+        // Loop from row -1 to ROW_COUNT - 1 (4 rows total) to cover the top gap during scrolling
+        for(int row=-1;row<ROW_COUNT;row++){
             float symY = reelTop - (row + scrollFrac)*symH;
             // Simple translate matrix
             float mvp[16]={1,0,0,0,0,1,0,0,0,0,1,0,reelX,symY,0,1};
@@ -279,6 +377,8 @@ void Renderer::passReels(const SlotEngine& engine) {
     }
     glBindVertexArray(0);
     glDeleteVertexArrays(1,&vao); glDeleteBuffers(1,&vbo);
+
+    glDisable(GL_SCISSOR_TEST);
 }
 
 void Renderer::passParticles() {
@@ -313,11 +413,11 @@ void Renderer::passPost() {
 
     GLuint p=m_shaders.postProg; glUseProgram(p);
     glActiveTexture(GL_TEXTURE0); glBindTexture(GL_TEXTURE_2D,m_sceneTex); u1i(p,"uScene",0);
-    glActiveTexture(GL_TEXTURE1); glBindTexture(GL_TEXTURE_2D,m_bloomTex); u1i(p,"uBloom",1);
+    glActiveTexture(GL_TEXTURE1); glBindTexture(GL_TEXTURE_2D,m_bloomTex); u1i(p,"uBloomTex",1);
     u1f(p,"uTime",m_time);
     u1f(p,"uChrom",chromaticStr);
     u1f(p,"uGrain",grainStrength);
-    u1f(p,"uBloom",bloomStrength);
+    u1f(p,"uBloomStr",bloomStrength);
     drawQuad();
 }
 

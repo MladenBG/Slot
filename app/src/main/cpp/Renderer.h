@@ -72,14 +72,14 @@ private:
 
 // Neon color per symbol (RGB 0-1)
 static const float kSymRGB[SYM_COUNT][3] = {
-    {1.0f,1.0f,1.0f},   // WILD    – white
+    {1.0f,0.85f,0.1f},  // WILD    – neon gold
     {0.0f,1.0f,1.0f},   // SCATTER – cyan
-    {1.0f,0.84f,0.0f},  // SEVEN   – gold
-    {1.0f,0.0f,0.5f},   // BAR3    – magenta
-    {0.6f,0.0f,1.0f},   // BAR2    – purple
-    {0.0f,0.6f,1.0f},   // BAR1    – blue
-    {0.2f,1.0f,0.4f},   // DIAMOND – green
-    {1.0f,0.2f,0.2f},   // CHERRY  – red
+    {1.0f,0.15f,0.15f}, // SEVEN   – neon red
+    {1.0f,0.0f,0.7f},   // BAR3    – neon magenta
+    {0.6f,0.0f,1.0f},   // BAR2    – neon purple
+    {0.0f,0.5f,1.0f},   // BAR1    – neon blue
+    {0.2f,1.0f,0.4f},   // DIAMOND – neon green
+    {1.0f,0.4f,0.0f},   // CHERRY  – neon orange-red
 };
 
 } // namespace MagicsSlot

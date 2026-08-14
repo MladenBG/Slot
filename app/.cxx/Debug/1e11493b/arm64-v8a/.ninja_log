@@ -1,0 +1,15 @@
+# ninja log v7
+33	52	8080124991136036	clean	994245a13f55f4d7
+85	160	8080130332032190	clean	994245a13f55f4d7
+97	180	8080135880476737	clean	994245a13f55f4d7
+67	124	8080136806905062	clean	994245a13f55f4d7
+60	74	8084372229893881	clean	994245a13f55f4d7
+220	2440	8084402015541502	CMakeFiles/magicsslot.dir/AudioEngine.cpp.o	7983c006979351bc
+148	2644	8084402014821651	CMakeFiles/magicsslot.dir/ShaderManager.cpp.o	d70c466c53e4b342
+74	3547	8084402014082062	CMakeFiles/magicsslot.dir/jni_bridge.cpp.o	a3aa922af3ef59b1
+112	3568	8084402014458526	CMakeFiles/magicsslot.dir/Renderer.cpp.o	139090ab02545f2b
+95	3735	8084402014293280	CMakeFiles/magicsslot.dir/SlotEngine.cpp.o	c5fad92a823b21b7
+131	3937	8084402014656547	CMakeFiles/magicsslot.dir/ParticleSystem.cpp.o	1aacc89ce33f4066
+3937	4147	8084402052713781	C:/Slot/app/build/intermediates/cxx/Debug/1e11493b/obj/arm64-v8a/libmagicsslot.so	c60c346a899c7beb
+15	4838	8084443018278365	CMakeFiles/magicsslot.dir/SlotEngine.cpp.o	c5fad92a823b21b7
+4839	5044	8084443066521454	C:/Slot/app/build/intermediates/cxx/Debug/1e11493b/obj/arm64-v8a/libmagicsslot.so	c60c346a899c7beb

@@ -11,67 +11,69 @@
 11    <uses-permission android:name="android.permission.VIBRATE" />
 11-->C:\Slot\app\src\main\AndroidManifest.xml:4:5-66
 11-->C:\Slot\app\src\main\AndroidManifest.xml:4:22-63
-12
-13    <uses-feature
-13-->C:\Slot\app\src\main\AndroidManifest.xml:5:5-78
-14        android:glEsVersion="0x00030002"
-14-->C:\Slot\app\src\main\AndroidManifest.xml:5:19-51
-15        android:required="true" />
-15-->C:\Slot\app\src\main\AndroidManifest.xml:5:52-75
-16
-17    <permission
-17-->[androidx.core:core:1.15.0] C:\Users\LU\.gradle\caches\8.9\transforms\46c323ef464e022576603c0d11cecfae\transformed\core-1.15.0\AndroidManifest.xml:22:5-24:47
-18        android:name="com.magics.slot.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-18-->[androidx.core:core:1.15.0] C:\Users\LU\.gradle\caches\8.9\transforms\46c323ef464e022576603c0d11cecfae\transformed\core-1.15.0\AndroidManifest.xml:23:9-81
-19        android:protectionLevel="signature" />
-19-->[androidx.core:core:1.15.0] C:\Users\LU\.gradle\caches\8.9\transforms\46c323ef464e022576603c0d11cecfae\transformed\core-1.15.0\AndroidManifest.xml:24:9-44
-20
-21    <uses-permission android:name="com.magics.slot.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-21-->[androidx.core:core:1.15.0] C:\Users\LU\.gradle\caches\8.9\transforms\46c323ef464e022576603c0d11cecfae\transformed\core-1.15.0\AndroidManifest.xml:26:5-97
-21-->[androidx.core:core:1.15.0] C:\Users\LU\.gradle\caches\8.9\transforms\46c323ef464e022576603c0d11cecfae\transformed\core-1.15.0\AndroidManifest.xml:26:22-94
-22
-23    <application
-23-->C:\Slot\app\src\main\AndroidManifest.xml:7:5-28:19
-24        android:allowBackup="true"
-24-->C:\Slot\app\src\main\AndroidManifest.xml:8:9-35
-25        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-25-->[androidx.core:core:1.15.0] C:\Users\LU\.gradle\caches\8.9\transforms\46c323ef464e022576603c0d11cecfae\transformed\core-1.15.0\AndroidManifest.xml:28:18-86
-26        android:debuggable="true"
-27        android:extractNativeLibs="false"
-28        android:hardwareAccelerated="true"
-28-->C:\Slot\app\src\main\AndroidManifest.xml:14:9-43
-29        android:icon="@mipmap/ic_launcher"
-29-->C:\Slot\app\src\main\AndroidManifest.xml:9:9-43
-30        android:label="@string/app_name"
-30-->C:\Slot\app\src\main\AndroidManifest.xml:10:9-41
-31        android:roundIcon="@mipmap/ic_launcher_round"
-31-->C:\Slot\app\src\main\AndroidManifest.xml:11:9-54
-32        android:supportsRtl="true"
-32-->C:\Slot\app\src\main\AndroidManifest.xml:12:9-35
-33        android:testOnly="true"
+12    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+12-->C:\Slot\app\src\main\AndroidManifest.xml:5:5-80
+12-->C:\Slot\app\src\main\AndroidManifest.xml:5:22-77
+13
+14    <uses-feature
+14-->C:\Slot\app\src\main\AndroidManifest.xml:6:5-78
+15        android:glEsVersion="0x00030002"
+15-->C:\Slot\app\src\main\AndroidManifest.xml:6:19-51
+16        android:required="true" />
+16-->C:\Slot\app\src\main\AndroidManifest.xml:6:52-75
+17
+18    <permission
+18-->[androidx.core:core:1.15.0] C:\Users\LU\.gradle\caches\8.9\transforms\46c323ef464e022576603c0d11cecfae\transformed\core-1.15.0\AndroidManifest.xml:22:5-24:47
+19        android:name="com.magics.slot.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+19-->[androidx.core:core:1.15.0] C:\Users\LU\.gradle\caches\8.9\transforms\46c323ef464e022576603c0d11cecfae\transformed\core-1.15.0\AndroidManifest.xml:23:9-81
+20        android:protectionLevel="signature" />
+20-->[androidx.core:core:1.15.0] C:\Users\LU\.gradle\caches\8.9\transforms\46c323ef464e022576603c0d11cecfae\transformed\core-1.15.0\AndroidManifest.xml:24:9-44
+21
+22    <uses-permission android:name="com.magics.slot.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+22-->[androidx.core:core:1.15.0] C:\Users\LU\.gradle\caches\8.9\transforms\46c323ef464e022576603c0d11cecfae\transformed\core-1.15.0\AndroidManifest.xml:26:5-97
+22-->[androidx.core:core:1.15.0] C:\Users\LU\.gradle\caches\8.9\transforms\46c323ef464e022576603c0d11cecfae\transformed\core-1.15.0\AndroidManifest.xml:26:22-94
+23
+24    <application
+24-->C:\Slot\app\src\main\AndroidManifest.xml:8:5-29:19
+25        android:allowBackup="true"
+25-->C:\Slot\app\src\main\AndroidManifest.xml:9:9-35
+26        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+26-->[androidx.core:core:1.15.0] C:\Users\LU\.gradle\caches\8.9\transforms\46c323ef464e022576603c0d11cecfae\transformed\core-1.15.0\AndroidManifest.xml:28:18-86
+27        android:debuggable="true"
+28        android:extractNativeLibs="false"
+29        android:hardwareAccelerated="true"
+29-->C:\Slot\app\src\main\AndroidManifest.xml:15:9-43
+30        android:icon="@mipmap/ic_launcher"
+30-->C:\Slot\app\src\main\AndroidManifest.xml:10:9-43
+31        android:label="@string/app_name"
+31-->C:\Slot\app\src\main\AndroidManifest.xml:11:9-41
+32        android:roundIcon="@mipmap/ic_launcher_round"
+32-->C:\Slot\app\src\main\AndroidManifest.xml:12:9-54
+33        android:supportsRtl="true"
+33-->C:\Slot\app\src\main\AndroidManifest.xml:13:9-35
 34        android:theme="@style/Theme.MagicsSlot" >
-34-->C:\Slot\app\src\main\AndroidManifest.xml:13:9-48
+34-->C:\Slot\app\src\main\AndroidManifest.xml:14:9-48
 35        <activity
-35-->C:\Slot\app\src\main\AndroidManifest.xml:16:9-26:20
+35-->C:\Slot\app\src\main\AndroidManifest.xml:17:9-27:20
 36            android:name="com.magics.slot.MainActivity"
-36-->C:\Slot\app\src\main\AndroidManifest.xml:17:13-41
+36-->C:\Slot\app\src\main\AndroidManifest.xml:18:13-41
 37            android:configChanges="orientation|keyboardHidden|screenSize"
-37-->C:\Slot\app\src\main\AndroidManifest.xml:19:13-74
+37-->C:\Slot\app\src\main\AndroidManifest.xml:20:13-74
 38            android:exported="true"
-38-->C:\Slot\app\src\main\AndroidManifest.xml:18:13-36
+38-->C:\Slot\app\src\main\AndroidManifest.xml:19:13-36
 39            android:screenOrientation="portrait"
-39-->C:\Slot\app\src\main\AndroidManifest.xml:20:13-49
+39-->C:\Slot\app\src\main\AndroidManifest.xml:21:13-49
 40            android:windowSoftInputMode="adjustResize" >
-40-->C:\Slot\app\src\main\AndroidManifest.xml:21:13-55
+40-->C:\Slot\app\src\main\AndroidManifest.xml:22:13-55
 41            <intent-filter>
-41-->C:\Slot\app\src\main\AndroidManifest.xml:22:13-25:29
+41-->C:\Slot\app\src\main\AndroidManifest.xml:23:13-26:29
 42                <action android:name="android.intent.action.MAIN" />
-42-->C:\Slot\app\src\main\AndroidManifest.xml:23:17-69
-42-->C:\Slot\app\src\main\AndroidManifest.xml:23:25-66
+42-->C:\Slot\app\src\main\AndroidManifest.xml:24:17-69
+42-->C:\Slot\app\src\main\AndroidManifest.xml:24:25-66
 43
 44                <category android:name="android.intent.category.LAUNCHER" />
-44-->C:\Slot\app\src\main\AndroidManifest.xml:24:17-77
-44-->C:\Slot\app\src\main\AndroidManifest.xml:24:27-74
+44-->C:\Slot\app\src\main\AndroidManifest.xml:25:17-77
+44-->C:\Slot\app\src\main\AndroidManifest.xml:25:27-74
 45            </intent-filter>
 46        </activity>
 47

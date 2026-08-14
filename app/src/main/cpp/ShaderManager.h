@@ -44,9 +44,16 @@ float glow(vec2 uv){
 void main(){
     vec4 t = texture(uTex, vUV);
     if(t.a < 0.05) discard;
+    
+    // Draw solid black outline without any glow or tint
+    if(t.r < 0.01 && t.g < 0.01 && t.b < 0.01) {
+        fragColor = vec4(0.0, 0.0, 0.0, t.a);
+        return;
+    }
+    
     vec3 c = mix(t.rgb, uTint.rgb, 0.2);
     if(uWin){ float p=0.5+0.5*sin(uTime*8.0); c=mix(c,uTint.rgb,p*0.5); }
-    c += uTint.rgb * glow(vUV) * 1.8;
+    c += uTint.rgb * glow(vUV) * 1.1; // Soften symbol glow to keep outlines clean
     fragColor = vec4(c, t.a);
 })GLSL";
 
@@ -110,10 +117,91 @@ void main(){
     // Scanline
     bg*=0.97+0.03*sin(uv.y*uRes.y*1.5);
 
-    // Neon grid lines (reel area highlight)
-    float gridX=abs(fract(uv.x*6.0)-0.5);
-    float gridLine=smoothstep(0.48,0.5,gridX)*0.06;
-    bg+=vec3(0.0,0.8,1.0)*gridLine*(1.0-abs(uv.y*2.0-1.0));
+    // ── Slot Machine Reels Frame (SDF) ──
+    float aspect = uRes.y / uRes.x;
+    float reelW  = 0.27;
+    float gapX   = 0.015;
+    float totalW = 5.0 * reelW + 4.0 * gapX;
+    float symH   = reelW / aspect;
+    float totalH = 3.0 * symH;
+
+    float uMin = -totalW * 0.25 + 0.5;
+    float uMax =  totalW * 0.25 + 0.5;
+    float vMin = -totalH * 0.25 + 0.5;
+    float vMax =  totalH * 0.25 + 0.5;
+
+    vec2 size = vec2(uMax - uMin, vMax - vMin) * 0.5;
+    vec2 center = vec2(uMin + uMax, vMin + vMax) * 0.5;
+    vec2 d2d = abs(uv - center) - size;
+    float distToBox = length(max(d2d, 0.0)) + min(max(d2d.x, d2d.y), 0.0);
+
+    if (distToBox < 0.0) {
+        // Reels container backdrop gap color (dark space between white strips)
+        vec3 reelBg = vec3(0.05, 0.04, 0.12);
+        bg = reelBg;
+
+        bool inReelStrip = false;
+        float reelCenterU = 0.0;
+
+        for (int i = 0; i < 5; i++) {
+            float rx = -totalW * 0.5 + float(i) * (reelW + gapX) + reelW * 0.5;
+            float ru = rx * 0.5 + 0.5;
+            float halfW = reelW * 0.25;
+
+            if (uv.x >= ru - halfW && uv.x <= ru + halfW) {
+                inReelStrip = true;
+                reelCenterU = ru;
+                break;
+            }
+        }
+
+        if (inReelStrip) {
+            // Normalize y between vMin and vMax to [0, 1]
+            float tY = (uv.y - vMin) / (vMax - vMin);
+            
+            // 3D cylindrical lighting (sine curve)
+            float shadow = sin(tY * 3.14159265); // 0 at top/bottom edges, 1 in center
+            shadow = pow(shadow, 0.28); // softer curve for nice lighting
+            
+            // White/light-gray base color with 3D vertical shadow
+            vec3 stripColor = mix(vec3(0.65, 0.67, 0.72), vec3(0.98, 0.98, 1.0), shadow);
+            
+            // Add subtle horizontal curved shading on the edges of each reel strip
+            float tX = (uv.x - (reelCenterU - reelW * 0.25)) / (reelW * 0.5);
+            float edgeShadow = sin(tX * 3.14159265);
+            edgeShadow = pow(edgeShadow, 0.12);
+            stripColor *= mix(0.82, 1.0, edgeShadow);
+            
+            bg = stripColor;
+        }
+
+        // Draw vertical reel separator lines
+        for (int i = 1; i < 5; i++) {
+            float rx = -totalW * 0.5 + float(i) * (reelW + gapX);
+            float ru = rx * 0.5 + 0.5;
+            float distToSep = abs(uv.x - ru);
+            float sepGlow = smoothstep(0.003, 0.0, distToSep);
+            bg += vec3(0.0, 0.6, 1.0) * sepGlow * 0.45;
+        }
+
+        // Draw horizontal row separator lines
+        for (int i = 1; i < 3; i++) {
+            float ry = -totalH * 0.5 + float(i) * symH;
+            float rv = ry * 0.5 + 0.5;
+            float distToSep = abs(uv.y - rv);
+            float sepGlow = smoothstep(0.003, 0.0, distToSep);
+            bg += vec3(0.0, 0.6, 1.0) * sepGlow * 0.35;
+        }
+    }
+
+    // Reels border neon glow (SDF glow)
+    float absDist = abs(distToBox);
+    float borderGlow = smoothstep(0.010, 0.0, absDist);
+    bg += vec3(0.0, 0.8, 1.0) * borderGlow * 1.6;
+
+    // Add an outer bright neon frame line
+    float borderLine = smoothstep(0.002, 0.0, absDist);
+    bg += vec3(0.8, 1.0, 1.0) * borderLine * 1.2;
 
     fragColor=vec4(bg,1.0);
 })GLSL";
@@ -179,8 +267,8 @@ out vec2 vUV; void main(){ gl_Position=vec4(aPos,0.0,1.0); vUV=aUV; })GLSL";
 static const char* kPostFrag = R"GLSL(#version 300 es
 precision highp float;
 in  vec2 vUV; out vec4 fragColor;
-uniform sampler2D uScene; uniform sampler2D uBloom;
-uniform float uTime; uniform float uChrom; uniform float uGrain; uniform float uBloom;
+uniform sampler2D uScene; uniform sampler2D uBloomTex;
+uniform float uTime; uniform float uChrom; uniform float uGrain; uniform float uBloomStr;
 
 float hash13(vec3 p){ p=fract(p*vec3(443.8975,397.2973,491.1871)); p+=dot(p.zxy,p.yxz+19.19); return fract(p.x*p.y*p.z); }
 
@@ -193,7 +281,7 @@ void main(){
     float g=texture(uScene,uv             ).g;
     float b=texture(uScene,uv-dir*str*0.8).b;
     vec3 col=vec3(r,g,b);
-    col+=texture(uBloom,uv).rgb*uBloom;
+    col+=texture(uBloomTex,uv).rgb*uBloomStr;
     float grain=(hash13(vec3(uv*1000.0,uTime*0.1))*2.0-1.0)*uGrain*0.04;
     col+=grain;
     col*=mix(0.6,1.0,1.0-smoothstep(0.4,1.0,len));

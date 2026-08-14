@@ -8,11 +8,14 @@ object SlotNativeBridge {
     init { System.loadLibrary("magicsslot") }
 
     // Lifecycle
-    external fun nativeInit()
+    external fun nativeInit(slotType: Int)
     external fun nativeCleanup()
+    
+    // Engine Tick
+    external fun nativeUpdate(dt: Float)
 
     // Surface
-    external fun nativeSurfaceCreated(w: Int, h: Int)
+    external fun nativeSurfaceCreated(width: Int, height: Int)
     external fun nativeSurfaceChanged(w: Int, h: Int)
     external fun nativeDrawFrame(dt: Float)
 
@@ -31,6 +34,7 @@ object SlotNativeBridge {
     external fun nativeFreeSpinsAwarded(): Int
     external fun nativeInFreeSpins(): Boolean
     external fun nativeFreeSpinsLeft(): Int
+    external fun nativeGetGrid(): IntArray
 
     // Audio
     external fun nativeSetMuted(muted: Boolean)

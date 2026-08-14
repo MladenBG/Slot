@@ -23,7 +23,7 @@ bool AudioEngine::init() {
     if(AAudio_createStreamBuilder(&b)!=AAUDIO_OK){ LOGE("AAudio builder failed"); return false; }
 
     AAudioStreamBuilder_setDirection(b,       AAUDIO_DIRECTION_OUTPUT);
-    AAudioStreamBuilder_setSharingMode(b,     AAUDIO_SHARING_MODE_EXCLUSIVE);
+    AAudioStreamBuilder_setSharingMode(b,     AAUDIO_SHARING_MODE_SHARED);
     AAudioStreamBuilder_setFormat(b,          AAUDIO_FORMAT_PCM_FLOAT);
     AAudioStreamBuilder_setChannelCount(b,    1);
     AAudioStreamBuilder_setPerformanceMode(b, AAUDIO_PERFORMANCE_MODE_LOW_LATENCY);

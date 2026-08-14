@@ -1,14 +1,82 @@
 [
     {
-        "merged": "com.magics.slot.app-debug-4:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.magics.slot.app-main-6:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-debug-4:\\drawable_bg_cabinet_real.png.flat",
+        "source": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-main-6:\\drawable\\bg_cabinet_real.png"
     },
     {
-        "merged": "com.magics.slot.app-debug-4:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.magics.slot.app-main-6:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-debug-4:\\drawable_sym_diamond.png.flat",
+        "source": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-main-6:\\drawable\\sym_diamond.png"
     },
     {
-        "merged": "com.magics.slot.app-debug-4:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "com.magics.slot.app-main-6:/drawable/ic_launcher_foreground.xml"
+        "merged": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-debug-4:\\drawable_bg_ocean_cabinet.png.flat",
+        "source": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-main-6:\\drawable\\bg_ocean_cabinet.png"
+    },
+    {
+        "merged": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-debug-4:\\drawable_sym_wild.png.flat",
+        "source": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-main-6:\\drawable\\sym_wild.png"
+    },
+    {
+        "merged": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-debug-4:\\drawable_sym_scatter.png.flat",
+        "source": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-main-6:\\drawable\\sym_scatter.png"
+    },
+    {
+        "merged": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-debug-4:\\drawable_bg_pharaoh_cabinet.png.flat",
+        "source": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-main-6:\\drawable\\bg_pharaoh_cabinet.png"
+    },
+    {
+        "merged": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-debug-4:\\drawable_sym_bar.png.flat",
+        "source": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-main-6:\\drawable\\sym_bar.png"
+    },
+    {
+        "merged": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-debug-4:\\drawable_bg_slot.png.flat",
+        "source": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-main-6:\\drawable\\bg_slot.png"
+    },
+    {
+        "merged": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-debug-4:\\drawable_bg_neon_cabinet.png.flat",
+        "source": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-main-6:\\drawable\\bg_neon_cabinet.png"
+    },
+    {
+        "merged": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-debug-4:\\drawable_bg_vegas_cabinet.png.flat",
+        "source": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-main-6:\\drawable\\bg_vegas_cabinet.png"
+    },
+    {
+        "merged": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-debug-4:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-main-6:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-debug-4:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-main-6:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-debug-4:\\drawable_bg_vegas.png.flat",
+        "source": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-main-6:\\drawable\\bg_vegas.png"
+    },
+    {
+        "merged": "com.magics.slot.app-debug-4:/drawable_bg_neon_cabinet.png.flat",
+        "source": "com.magics.slot.app-main-6:/drawable/bg_neon_cabinet.png"
+    },
+    {
+        "merged": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-debug-4:\\drawable_bg_neon.png.flat",
+        "source": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-main-6:\\drawable\\bg_neon.png"
+    },
+    {
+        "merged": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-debug-4:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-main-6:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-debug-4:\\drawable_sym_seven.png.flat",
+        "source": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-main-6:\\drawable\\sym_seven.png"
+    },
+    {
+        "merged": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-debug-4:\\drawable_bg_pharaoh.png.flat",
+        "source": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-main-6:\\drawable\\bg_pharaoh.png"
+    },
+    {
+        "merged": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-debug-4:\\drawable_bg_ocean.png.flat",
+        "source": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-main-6:\\drawable\\bg_ocean.png"
+    },
+    {
+        "merged": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-debug-4:\\drawable_sym_cherry.png.flat",
+        "source": "C:\\Users\\LU\\.gradle\\daemon\\8.9\\com.magics.slot.app-main-6:\\drawable\\sym_cherry.png"
     }
 ]

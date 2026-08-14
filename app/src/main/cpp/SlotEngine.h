@@ -22,10 +22,10 @@ enum Symbol : uint8_t {
     SYM_COUNT   = 8
 };
 
-static constexpr int REEL_COUNT    = 5;
+static constexpr int MAX_REEL_COUNT = 5;
 static constexpr int ROW_COUNT     = 3;
 static constexpr int PAYLINE_COUNT = 20;
-static constexpr int REEL_STRIP    = 32;
+static constexpr int REEL_STRIP    = 40;
 
 struct WinResult {
     int    payline;
@@ -36,7 +36,7 @@ struct WinResult {
 };
 
 struct SpinResult {
-    std::array<std::array<Symbol, ROW_COUNT>, REEL_COUNT> grid;
+    std::array<std::array<Symbol, ROW_COUNT>, MAX_REEL_COUNT> grid;
     std::vector<WinResult> wins;
     float totalWin;
     bool  scatterWin;
@@ -54,7 +54,9 @@ struct ReelState {
 
 class SlotEngine {
 public:
-    SlotEngine();
+    SlotEngine(int slotType = 0);
+
+    int    getReelCount() const { return m_reelCount; }
 
     void   setBalance(double credits);
     void   setBet(double betPerLine);
@@ -89,10 +91,13 @@ private:
     double m_betPerLine;
     bool   m_spinning;
     int    m_freeSpinsLeft;
+    float  m_spinTimer;
 
-    std::array<std::array<Symbol, REEL_STRIP>, REEL_COUNT> m_strips;
-    std::array<ReelState, REEL_COUNT>  m_reelState;
-    std::array<int, REEL_COUNT>        m_stopPositions;
+    int            m_slotType;
+    int            m_reelCount;
+    Symbol         m_strips[MAX_REEL_COUNT][REEL_STRIP];
+    ReelState      m_reelState[MAX_REEL_COUNT];
+    int            m_stopPositions[MAX_REEL_COUNT];
     SpinResult                         m_lastResult;
 
     void  initStrips();

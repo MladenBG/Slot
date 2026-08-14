@@ -1,0 +1,8 @@
+ninja: Entering directory `C:\Slot\app\.cxx\Debug\1e11493b\arm64-v8a'
+[1/2] Building CXX object CMakeFiles/magicsslot.dir/SlotEngine.cpp.o
+In file included from C:/Slot/app/src/main/cpp/SlotEngine.cpp:4:
+C:/Slot/app/src/main/cpp/SlotEngine.h:96:20: warning: private field 'm_slotType' is not used [-Wunused-private-field]
+   96 |     int            m_slotType;
+      |                    ^
+1 warning generated.
+[2/2] Linking CXX shared library C:\Slot\app\build\intermediates\cxx\Debug\1e11493b\obj\arm64-v8a\libmagicsslot.so
